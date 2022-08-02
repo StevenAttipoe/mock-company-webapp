@@ -1,6 +1,13 @@
 pipeline {
-  /*
-   * TODO: Implement pipeline stages/steps
-   *   See documentation: https://www.jenkins.io/doc/book/pipeline/syntax/#stages
-   */
+   on: push
+   name: Jenkins single-shot master
+   jobs:
+     jenkinsfile-runner-prepackaged:
+       runs-on: ubuntu-latest
+       steps:
+       - uses: actions/checkout@master
+       - name: jenkinsfile-runner-prepackaged
+         uses: jenkinsci/jenkinsfile-runner-github-actions/jenkinsfile-runner-prepackaged@master
+         env:
+           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 }
